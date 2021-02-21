@@ -3,7 +3,7 @@ Title: Docs index
 Github only: true
 ---
 
-# Docs index
+# Activiti Enterprise Doküman index
 Aşağıda, Activiti Enterprise için mevcut belgelerin bir indeksi yer almaktadır:
 
 * [Giriş](introduction/README.md)
