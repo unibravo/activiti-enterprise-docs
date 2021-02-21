@@ -1,18 +1,18 @@
 ---
-Title: Introduction
+Başlık: Giriş
 ---
 
-# Introduction
-Alfresco Activiti Enterprise is used for modeling and publishing process applications based on Business Process Model and Notation (BPMN). 
+# Giriş
+Alfresco Activiti Enterprise, Business Process Model and Notation'a (BPMN) dayalı süreç uygulamalarını modellemek ve yayınlamak için kullanılır.
 
-## Business Process Management
-Business Process Management (BPM) is a method of modelling, optimizing and automating business processes. It allows processes to be analyzed and iterated upon to improve their efficiency and effectiveness. 
+## İş Süreçleri Yönetimi
+İş Süreçleri Yönetimi (BPM), iş süreçlerini modelleme, optimize etme ve otomatikleştirme yöntemidir. Verimlilik ve etkinliklerini iyileştirmek için süreçlerin analiz edilmesine ve yinelenmesine izin verir.
 
-The current standard for modeling business processes graphically is [BPMN (Business Process Model and Notation) 2.0](http://www.bpmn.org/). BPMN allows relatively non-technical business users to follow and understand an end-to-end process diagram, whilst more detail can be added for technical audiences.
+İş süreçlerini grafiksel olarak modellemek için mevcut standart bpmn'dir [BPMN (Business Process Model and Notation) 2.0](http://www.bpmn.org/). BPMN, nispeten teknik olmayan iş kullanıcılarının uçtan uca bir süreç şemasını takip etmelerine ve anlamalarına izin verirken, teknik izleyiciler için daha fazla ayrıntı eklenebilir.
 
-A BPM solution allows the modeling of business processes graphically for high-level representation, with the underlying XML containing the technical detail. 
+Bir BPM çözümü, teknik detayı içeren temel XML ile iş süreçlerinin grafiksel olarak modellenmesine olanak tanır.
 
-Alfresco Activiti Enterprise is a lightweight, java-centric BPM solution providing a suite of tools to model and automate business processes on distributed infrastructures.
+Alfresco Activiti Enterprise, dağıtılmış altyapılarda iş süreçlerini modellemek ve otomatikleştirmek için bir takım araçlar sunan hafif, java merkezli bir BPM çözümüdür.
 
 ## Alfresco Activiti Enterprise
-Alfresco Activiti Enterprise has been re-designed from previous releases into a cloud native platform, in order to take advantage of the benefits of a cloud native approach to development. Alfresco Activiti Enterprise leverages the benefits of microservices and containerization to allow for quick, zero downtime deployments that are scalable.
+Alfresco Activiti Enterprise, geliştirmeye yönelik bulut yerel yaklaşımının avantajlarından yararlanmak için önceki sürümlerden bulut yerel platforma yeniden tasarlandı. Alfresco Activiti Enterprise, ölçeklenebilir hızlı, sıfır kesinti süresi dağıtımlarına izin vermek için mikro hizmetlerin ve konteynerleştirmenin avantajlarından yararlanır.
