@@ -6,44 +6,46 @@ Başlık: Platform hizmetleri
 Platform hizmetleri, tek bir Kubernetes ad alanına dağıtılan hizmetlerdir ve Activiti Enterprise tarafından, uygulama ve hizmetlerin kaç bireysel uygulamanın dağıtıldığına bakılmaksızın tüm dağıtım boyunca yönetilmesi için kullanılır.
 
 ## Modelleme hizmeti
-Modelleme hizmeti, aşağıdakiler için gerekli arka uç işlevselliğini içerir: [Alfresco Modelleme Uygulaması](../modeling/README.md) çalıştırmak için. [Dağıtım hizmeti] 'nin (# dağıtım hizmeti) projeleri dağıtmak için kullandığı proje ve model tanımlarını depolamak için kendisiyle birlikte dağıtılan bir Postgres örneğini gerektirir. Bu Postgres örneği, bir platform düzeyinde konuşlandırılır ve [uygulama hizmetleri] (../ architecture / application.md) tarafından kullanılan olandan bağımsızdır. Ayrıca, dağıtım hizmeti tarafından kullanılan Postgres örneğinden bağımsızdır.
+Modelleme hizmeti, aşağıdakiler için gerekli arka uç işlevselliğini içerir: [Alfresco Modelleme Uygulaması](../modeling/README.md) çalıştırmak için. [deployment service](#deployment-service)'in projeleri dağıtmak için kullandığı proje ve model tanımlarını depolamak için kendisiyle birlikte dağıtılan bir Postgres örneğini gerektirir. Bu Postgres örneği, bir platform düzeyinde konuşlandırılır ve [application services](../architecture/application.md) tarafından kullanılandan bağımsızdır. Ayrıca, dağıtım hizmeti tarafından kullanılan Postgres örneğinden bağımsızdır.
 
-The modeling service also contains simulation services so that decision table and script functionality can be tested during the modeling experience. 
+Modelleme hizmeti ayrıca simülasyon hizmetlerini de içerir, böylece karar tablosu ve komut dosyası işlevselliği modelleme deneyimi sırasında test edilebilir.
 
-The REST APIs that the modeling service exposes deal with projects, models and releases. 
+Modelleme hizmetinin sunduğu REST API'leri projeler, modeller ve sürümlerle ilgilenir.
 
-The following is a high level diagram of the modeling service:
+Aşağıda modelleme hizmetinin yüksek seviyeli bir diyagramı verilmiştir:
 
-![Modeling service diagram](../images/arch-modeling.png)
+[Modelleme hizmeti diyagramı](../images/arch-modeling.png)
 
-## Deployment service
-The deployment service is used to create deployment descriptors and to deploy released projects. 
+## Dağıtım hizmeti
+Dağıtım hizmeti, dağıtım tanımlayıcıları oluşturmak ve yayımlanan projeleri dağıtmak için kullanılır.
 
-* Using the deployment service to create a deployment descriptor uses the API to create a descriptor for a released project that can be download as a Helm chart and then subsequently deployed via Helm. A deployment descriptor can also still be deployed into the Activiti Enterprise cluster. 
+* Bir dağıtım tanımlayıcısı oluşturmak için dağıtım hizmetini kullanmak, bir Helm grafiği olarak indirilebilen ve daha sonra Helm aracılığıyla dağıtılabilen yayınlanmış bir proje için bir tanımlayıcı oluşturmak üzere API'yi kullanır. Activiti Enterprise kümesine bir dağıtım tanımlayıcısı da yerleştirilebilir.
 
-* Using the deployment service to deploy a released project creates a deployment descriptor but also deploys the application into the Activiti Enterprise cluster in its own namespace. 
+* Yayınlanmış bir projeyi dağıtmak için dağıtım hizmetini kullanmak bir dağıtım tanımlayıcısı oluşturur, ancak uygulamayı kendi ad alanındaki Activiti Enterprise kümesine dağıtır.
 
-The following diagram shows the steps that the deployment service takes to create a deployment descriptor and deploy a released project:
+Aşağıdaki diyagram, dağıtım hizmetinin bir dağıtım tanımlayıcısı oluşturmak ve yayımlanmış bir projeyi dağıtmak için uyguladığı adımları gösterir:
 
 ![Deployment service diagram](../images/arch-deployment-service.png)
 
-Once a payload has been submitted to the deployment service through the API or using the Administrator Application a sequence of events happen:
+API aracılığıyla veya Yönetici Uygulaması kullanılarak dağıtım hizmetine bir yük gönderildiğinde, bir dizi olay gerçekleşir:
 
-* The first thing is validation to ensure the payload contains no errors and that there are no conflicts with any other application names already deployed into the cluster. 
-* Once validation has passed a series of data enrichment is applied to the payload specifying default values. 
-* After data enrichment is complete the payload is saved to the deployment service database as a descriptor. By default this is a PostgreSQL database instance called **aps2-postgresql-ads**.
-* Base images already exist in the Docker registry for the all [application services](../architecture/application.md) and are re-used at deployment time. For the runtime bundle, form service and DMN service, a base image is used that references a persistent volume that contains the static [project definition files](../modeling/projects.md#files). The persistent volume is created and mounted in the new namespace 
+* İlk şey, yükün hata içermediğinden ve kümede halihazırda konuşlandırılmış diğer uygulama adlarıyla hiçbir çakışma olmadığından emin olmak için doğrulamadır.
+* Doğrulama geçtikten sonra, yüke varsayılan değerleri belirten bir dizi veri zenginleştirme uygulanır.
+* Veri zenginleştirme tamamlandıktan sonra yük, açıklayıcı olarak dağıtım hizmeti veritabanına kaydedilir. Varsayılan olarak bu, adı verilen bir PostgreSQL veritabanı örneğidir **aps2-postgresql-ads**.
+* Temel görüntüler Docker kayıt defterinde zaten var [application services](../architecture/application.md) ve dağıtım zamanında yeniden kullanılır. Çalışma zamanı paketi, form hizmeti ve DMN hizmeti için, statik bilgileri içeren kalıcı bir birime başvuran bir temel görüntü kullanılır. [project definition files](../modeling/projects.md#files). Kalıcı birim oluşturulur ve yeni namespace'e eklenir
 
-	**Note**: At this point a deployment descriptor can be downloaded.
+	**Not**: Bu noktada bir dağıtım tanımlayıcısı indirilebilir.
 
-* The final stage to deploy uses the Kubernetes API to deploy the images into their own namespace. This also includes a persistent volume that is mounted in the new namespace.
+* Dağıtmanın son aşaması, görüntüleri kendi ad alanlarına dağıtmak için Kubernetes API'yi kullanır. Bu aynı zamanda yeni ad alanına takılan kalıcı bir birimi de içerir.
 
-	**Note**: It is still possible to deploy a deployment descriptor using the deployment service as well as download it and deploy it manually via Helm. 
+	**Not**: Dağıtım hizmetini kullanarak bir dağıtım tanımlayıcısını dağıtmak, indirmek ve Helm aracılığıyla manuel olarak dağıtmak hala mümkündür.
 
 ## Alfresco Content Services
-An instance of [Alfresco Content Services (ACS)](https://docs.alfresco.com/6.1/references/whats-new.html) is deployed as part of Alfresco Activiti Enterprise to store information about in progress tasks and processes in a content repository. ACS is not required to use Activiti Enterprise and the data for tasks and processes is still stored in databases.
 
-## Identity Service
-Alfresco Activiti Enterprise uses the [Identity Service](https://docs.alfresco.com/identity/concepts/identity-overview.html) for authentication and user and role management throughout the product. Authentication can be [configured](http://docs.alfresco.com/identity/concepts/identity-configure.html) to external identity provider instances such as LDAP and SAML. 
+Bir içerik havuzunda devam eden görevler ve işlemler hakkındaki bilgileri depolamak için Alfresco Activiti Enterprise'ın bir parçası olarak bir örnek yerleştirilir [Alfresco Content Services (ACS)](https://docs.alfresco.com/6.1/references/whats-new.html). Activiti Enterprise'ı kullanmak için ACS gerekli değildir ve görevler ve süreçler için veriler yine de veritabanlarında saklanır.
 
-The [Alfresco Administrator Application](../administrator/identity/README.md) allows administrators to manage common user-related functions without needing to access the Identity Service. 
+## Kimlik Hizmeti
+Alfresco Activiti Enterprise, ürün genelinde kimlik doğrulama ve kullanıcı ve rol yönetimi için Kimlik Hizmetini kullanır [Identity Service](https://docs.alfresco.com/identity/concepts/identity-overview.html). 
+Kimlik doğrulama, LDAP ve SAML gibi harici kimlik sağlayıcı örneklerine yapılandırılabilir: [configured](http://docs.alfresco.com/identity/concepts/identity-configure.html) 
+
+Alfresco Yönetici Uygulaması, yöneticilerin Kimlik Hizmetine erişmeye gerek kalmadan kullanıcıyla ilgili genel işlevleri yönetmelerine olanak tanır. [Alfresco Administrator Application](../administrator/identity/README.md)
