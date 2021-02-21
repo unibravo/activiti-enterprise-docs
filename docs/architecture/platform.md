@@ -1,12 +1,12 @@
 ---
-Title: Platform services
+Başlık: Platform hizmetleri
 ---
 
-# Platform services
-Platform services are those services that are deployed into a single Kubernetes namespace and are used by Activiti Enterprise to manage applications and services across the entire deployment, irrespective of how many individual applications are deployed.
+# Platform hizmetleri
+Platform hizmetleri, tek bir Kubernetes ad alanına dağıtılan hizmetlerdir ve Activiti Enterprise tarafından, uygulama ve hizmetlerin kaç bireysel uygulamanın dağıtıldığına bakılmaksızın tüm dağıtım boyunca yönetilmesi için kullanılır.
 
-## Modeling service
-The modeling service contains the backend functionality required for the [Alfresco Modeling Application](../modeling/README.md) to run. It requires an instance of Postgres deployed with it for storing project and model definitions that the [deployment service](#deployment-service) uses to deploy projects. This instance of Postgres is deployed at a platform level and is independent of the one used by the [application services](../architecture/application.md). It is also independent of the Postgres instance used by the deployment service.
+## Modelleme hizmeti
+Modelleme hizmeti, aşağıdakiler için gerekli arka uç işlevselliğini içerir: [Alfresco Modelleme Uygulaması](../modeling/README.md) çalıştırmak için. [Dağıtım hizmeti] 'nin (# dağıtım hizmeti) projeleri dağıtmak için kullandığı proje ve model tanımlarını depolamak için kendisiyle birlikte dağıtılan bir Postgres örneğini gerektirir. Bu Postgres örneği, bir platform düzeyinde konuşlandırılır ve [uygulama hizmetleri] (../ architecture / application.md) tarafından kullanılan olandan bağımsızdır. Ayrıca, dağıtım hizmeti tarafından kullanılan Postgres örneğinden bağımsızdır.
 
 The modeling service also contains simulation services so that decision table and script functionality can be tested during the modeling experience. 
 
