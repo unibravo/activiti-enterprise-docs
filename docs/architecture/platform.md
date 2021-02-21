@@ -14,7 +14,7 @@ Modelleme hizmetinin sunduğu REST API'leri projeler, modeller ve sürümlerle i
 
 Aşağıda modelleme hizmetinin yüksek seviyeli bir diyagramı verilmiştir:
 
-[Modelleme hizmeti diyagramı](../images/arch-modeling.png)
+![Modelleme Hizmeti Diyagramı](../images/arch-modeling.png)
 
 ## Dağıtım hizmeti
 Dağıtım hizmeti, dağıtım tanımlayıcıları oluşturmak ve yayımlanan projeleri dağıtmak için kullanılır.
