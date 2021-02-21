@@ -6,7 +6,7 @@ Başlık: Platform hizmetleri
 Platform hizmetleri, tek bir Kubernetes ad alanına dağıtılan hizmetlerdir ve Activiti Enterprise tarafından, uygulama ve hizmetlerin kaç bireysel uygulamanın dağıtıldığına bakılmaksızın tüm dağıtım boyunca yönetilmesi için kullanılır.
 
 ## Modelleme hizmeti
-Modelleme hizmeti, aşağıdakiler için gerekli arka uç işlevselliğini içerir: [Alfresco Modelleme Uygulaması](../modeling/README.md) çalıştırmak için. [deployment service](#deployment-hizmeti) in projeleri dağıtmak için kullandığı proje ve model tanımlarını depolamak için kendisiyle birlikte dağıtılan bir Postgres örneğini gerektirir. Bu Postgres örneği, bir platform düzeyinde konuşlandırılır ve [application services](../architecture/application.md) tarafından kullanılandan bağımsızdır. Ayrıca, dağıtım hizmeti tarafından kullanılan Postgres örneğinden bağımsızdır.
+Modelleme hizmeti, aşağıdakiler için gerekli arka uç işlevselliğini içerir: [Alfresco Modelleme Uygulaması](../modeling/README.md) çalıştırmak için. [deployment service](#dağıtım-hizmeti) in projeleri dağıtmak için kullandığı proje ve model tanımlarını depolamak için kendisiyle birlikte dağıtılan bir Postgres örneğini gerektirir. Bu Postgres örneği, bir platform düzeyinde konuşlandırılır ve [application services](../architecture/application.md) tarafından kullanılandan bağımsızdır. Ayrıca, dağıtım hizmeti tarafından kullanılan Postgres örneğinden bağımsızdır.
 
 Modelleme hizmeti ayrıca simülasyon hizmetlerini de içerir, böylece karar tablosu ve komut dosyası işlevselliği modelleme deneyimi sırasında test edilebilir.
 
@@ -16,7 +16,7 @@ Aşağıda modelleme hizmetinin yüksek seviyeli bir diyagramı verilmiştir:
 
 [Modelleme hizmeti diyagramı](../images/arch-modeling.png)
 
-## Deployment hizmeti
+## Dağıtım hizmeti
 Dağıtım hizmeti, dağıtım tanımlayıcıları oluşturmak ve yayımlanan projeleri dağıtmak için kullanılır.
 
 * Bir dağıtım tanımlayıcısı oluşturmak için dağıtım hizmetini kullanmak, bir Helm grafiği olarak indirilebilen ve daha sonra Helm aracılığıyla dağıtılabilen yayınlanmış bir proje için bir tanımlayıcı oluşturmak üzere API'yi kullanır. Activiti Enterprise kümesine bir dağıtım tanımlayıcısı da yerleştirilebilir.
