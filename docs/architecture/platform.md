@@ -16,7 +16,7 @@ Aşağıda modelleme hizmetinin yüksek seviyeli bir diyagramı verilmiştir:
 
 [Modelleme hizmeti diyagramı](../images/arch-modeling.png)
 
-## Dağıtım hizmeti
+## Deployment service
 Dağıtım hizmeti, dağıtım tanımlayıcıları oluşturmak ve yayımlanan projeleri dağıtmak için kullanılır.
 
 * Bir dağıtım tanımlayıcısı oluşturmak için dağıtım hizmetini kullanmak, bir Helm grafiği olarak indirilebilen ve daha sonra Helm aracılığıyla dağıtılabilen yayınlanmış bir proje için bir tanımlayıcı oluşturmak üzere API'yi kullanır. Activiti Enterprise kümesine bir dağıtım tanımlayıcısı da yerleştirilebilir.
